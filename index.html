@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecurID - 証明書管理アプリ</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>SecurID</h1>
+        <div id="user-info" class="user-info"></div>
+      </header>
+
+      <section id="login-screen" class="screen active">
+        <h2>ログイン / 新規登録</h2>
+        <p>初回入力時に自動で登録されます。</p>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input
+              type="email"
+              id="email"
+              required
+              placeholder="example@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">パスワード</label>
+            <input type="password" id="password" required />
+          </div>
+          <div class="form-group">
+            <label for="secretPhrase"> ヒミツの合言葉</label>
+            <input
+              type="password"
+              id="secretPhrase"
+              required
+              placeholder="例: 好きな食べ物は？"
+            />
+          </div>
+          <button type="submit" class="btn primary-btn">ログイン</button>
+        </form>
+      </section>
+
+      <section id="main-screen" class="screen">
+        <h2>証明書一覧</h2>
+        <div class="upload-area">
+          <label for="image-upload" class="upload-label">
+            <span>+ 新しい証明書をアップロード</span>
+          </label>
+          <input type="file" id="image-upload" accept="image/*" />
+        </div>
+        <div id="gallery" class="gallery-grid"></div>
+        <button id="logout-btn" class="btn secondary-btn">ログアウト</button>
+      </section>
+
+      <section id="edit-screen" class="screen">
+        <h2>画像の一部を隠す</h2>
+        <p>
+          隠したい部分をドラッグして黒塗りします。不要な場合はそのまま保存してください。
+        </p>
+
+        <div class="edit-controls">
+          <div class="control-group">
+            <label for="image-title">画像の名前:</label>
+            <input type="text" id="image-title" placeholder="例: 免許証、パスポート" required />
+          </div>
+        </div>
+
+        <div class="edit-controls">
+          <div class="mode-toggles">
+            <button id="paint-mode-btn" class="mode-btn active" title="黒塗りモード">🖌 塗り</button>
+            <button id="crop-mode-btn" class="mode-btn" title="トリミングモード">✂ 切り抜き</button>
+          </div>
+          <div class="control-group pen-controls">
+            <label for="pen-size">太さ:</label>
+            <input type="range" id="pen-size" min="5" max="100" value="30" />
+          </div>
+          <button id="apply-crop-btn" class="btn primary-btn small-btn hidden">切り抜きを実行</button>
+          <button id="undo-btn" class="btn secondary-btn small-btn">1つ戻す</button>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="edit-canvas"></canvas>
+        </div>
+        <div class="action-buttons">
+          <button id="cancel-edit-btn" class="btn secondary-btn">
+            キャンセル
+          </button>
+          <button id="save-edit-btn" class="btn primary-btn">
+            保存して一覧へ
+          </button>
+        </div>
+      </section>
+
+      <!-- 拡大表示用モーダル -->
+      <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content-container">
+          <img class="modal-content" id="modal-img" />
+          <div class="modal-actions">
+            <div id="unmask-controls" class="unmask-controls">
+              <input
+                type="text"
+                id="modal-secret-phrase"
+                placeholder="合言葉を入力"
+              />
+              <button id="unmask-btn" class="modal-btn">
+                <span class="icon">👁</span> 閲覧解除
+              </button>
+            </div>
+            <button id="edit-icon-btn" class="modal-btn" title="編集する">
+              <span class="icon">✎</span> 編集
+            </button>
+            <button
+              id="delete-img-btn"
+              class="modal-btn delete-btn"
+              title="削除する"
+            >
+              <span class="icon">🗑</span> 削除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

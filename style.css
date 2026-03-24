@@ -1,0 +1,354 @@
+/* 基本設定とリセット */
+:root {
+  --primary-color: #0056b3;
+  --bg-color: #f4f7f6;
+  --text-color: #333;
+  --card-bg: #fff;
+  --border-radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* アプリケーションのコンテナ */
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: var(--primary-color);
+}
+
+.user-info {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* 画面の切り替え設定 */
+.screen {
+  display: none;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+  display: block;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* フォームのデザイン */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* ボタンのデザイン */
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.secondary-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* アップロードエリア */
+.upload-area {
+  margin-bottom: 20px;
+}
+
+.upload-label {
+  display: block;
+  background-color: #e9ecef;
+  padding: 20px;
+  text-align: center;
+  border: 2px dashed #adb5bd;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  color: #495057;
+}
+
+#image-upload {
+  display: none;
+}
+
+/* ギャラリー（一覧） */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 編集用キャンバス */
+.canvas-container {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+  cursor: crosshair;
+  display: block;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* 編集コントロール */
+.edit-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mode-toggles {
+  display: flex;
+  gap: 5px;
+  background: #eee;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.mode-btn {
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.mode-btn.active {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: bold;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.small-btn {
+  width: auto;
+  padding: 5px 15px;
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
+/* モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  min-height: 100%;
+}
+
+.modal-content {
+  max-width: 100%;
+  max-height: 80vh;
+  border: 3px solid white;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.unmask-controls {
+  display: flex;
+  gap: 10px;
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.unmask-controls input {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  width: 150px;
+}
+
+.modal-btn {
+  background: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.delete-btn {
+  color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #f8d7da;
+}
+
+.modal-btn:hover {
+  transform: scale(1.05);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.gallery-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s;
+  text-align: center;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  background-color: #d0d0d0;
+}
+
+.gallery-item span {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.gallery-grid img {
+  display: none; /* 直接表示しない */
+}
